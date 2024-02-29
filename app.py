@@ -22,7 +22,8 @@ from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 opts = FirefoxOptions()
 opts.add_argument("--headless")
-
+opts.add_argument("--disable-notifications")
+opts.add_argument("--disable-popup-blocking")
 
 #nkfndf dfndfn
 
