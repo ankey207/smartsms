@@ -137,7 +137,7 @@ if segment=="SmartSMS":
                         messages.append(message)
 
                 #lancement du navigateur
-                driver = uc.Chrome(driver_executable_path="chromedriver.exe",options=chrome_options,headless=True)
+                driver = uc.Chrome(driver_executable_path="./chromedriver.exe",options=chrome_options,headless=True)
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/")
 
