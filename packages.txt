@@ -1,2 +1,3 @@
+chrome==122.0.6261.95
 chromium
 chromium-driver
