@@ -6,8 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 import streamlit_antd_components as sac
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
+
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-notifications")
@@ -21,12 +24,10 @@ import os, sys
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 opts = FirefoxOptions()
-opts.add_argument("--headless")
+#opts.add_argument("--headless")
 opts.add_argument("--disable-notifications")
 opts.add_argument("--disable-popup-blocking")
 
-from PIL import Image
-from io import BytesIO
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
@@ -37,12 +38,13 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
 @st.cache_resource 
 def installff():
-  os.system('sbase install geckodriver')
-  os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
+  return Service(GeckoDriverManager().install())
+service = installff()
 
-_ = installff()
+
 st.header("SMARTSMS: PERSONNALISEZ ET ENVOYEZ DES SMS EN MASSE FACILEMENT")
 function.load_styles()
 segment =sac.segmented(
@@ -151,7 +153,7 @@ if segment=="SmartSMS":
                         messages.append(message)
 
                 #lancement du navigateur
-                driver =webdriver.Firefox(options=opts)#driver_executable_path="./chromedriver.exe",
+                driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/")
 
