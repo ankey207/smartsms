@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 import streamlit_antd_components as sac
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium import webdriver
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-notifications")
@@ -136,23 +137,9 @@ if segment=="SmartSMS":
                         messages.append(message)
 
                 #lancement du navigateur
-                progress_text = "Operation in progress. Please wait."
-                progress_bar = st.progress(0, text=progress_text)
-
                 driver = uc.Chrome(options=chrome_options,headless=True)
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/")
-
-                wait_bar = WebDriverWait(driver, 0.5)
-                for percent_complete in range(100):
-                    try:
-                        wait_bar.until(EC.presence_of_element_located((By.XPATH, '//mw-qr-code/img')))
-                        progress_bar.progress(100, text=progress_text)
-                        break
-                    except:
-                        time.sleep(1)
-                    progress_bar.progress(percent_complete + 1, text=progress_text)
-                progress_bar.empty()
 
                 #attendre que le qrcode soit disponble
                 wait_element = WebDriverWait(driver, 120)
