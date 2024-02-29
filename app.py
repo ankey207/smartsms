@@ -16,6 +16,12 @@ import pandas as pd
 import undetected_chromedriver as uc
 import time
 import function
+import os, sys
+
+from selenium import webdriver
+from selenium.webdriver import FirefoxOptions
+opts = FirefoxOptions()
+opts.add_argument("--headless")
 
 
 #nkfndf dfndfn
@@ -29,6 +35,12 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+@st.cache_resource 
+def installff():
+  os.system('sbase install geckodriver')
+  os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
+
+_ = installff()
 st.header("SMARTSMS: PERSONNALISEZ ET ENVOYEZ DES SMS EN MASSE FACILEMENT")
 function.load_styles()
 segment =sac.segmented(
@@ -137,7 +149,7 @@ if segment=="SmartSMS":
                         messages.append(message)
 
                 #lancement du navigateur
-                driver = uc.Chrome(options=chrome_options,headless=True) #driver_executable_path="./chromedriver.exe",
+                driver =webdriver.Firefox(options=opts)#driver_executable_path="./chromedriver.exe",
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/")
 
