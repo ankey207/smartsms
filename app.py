@@ -13,7 +13,7 @@ chrome_options = Options()
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-popup-blocking")
 import pandas as pd
-import undetected_chromedriver as uc
+#import undetected_chromedriver as uc
 import time
 import function
 import os, sys
@@ -25,7 +25,8 @@ opts.add_argument("--headless")
 opts.add_argument("--disable-notifications")
 opts.add_argument("--disable-popup-blocking")
 
-#nkfndf dfndfn
+from PIL import Image
+from io import BytesIO
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
