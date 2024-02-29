@@ -38,11 +38,7 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
-
-@st.cache_resource 
-def installff():
-  return Service(GeckoDriverManager().install())
-service = installff()
+service = Service(GeckoDriverManager().install())
 
 
 st.header("SMARTSMS: PERSONNALISEZ ET ENVOYEZ DES SMS EN MASSE FACILEMENT")
