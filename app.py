@@ -38,9 +38,13 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
-service = Service(GeckoDriverManager().install())
 
+@st.cache_resource 
+def installff():
+  os.system('sbase install geckodriver')
+  os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
 
+_ = installff()
 st.header("SMARTSMS: PERSONNALISEZ ET ENVOYEZ DES SMS EN MASSE FACILEMENT")
 function.load_styles()
 segment =sac.segmented(
