@@ -43,16 +43,9 @@ service = Service(GeckoDriverManager().install())
 
 @st.cache_resource 
 def installff():
-    # Installer GeckoDriver
-    os.system('sudo apt-get install geckodriver')
+  os.system('sbase install geckodriver')
+  os.system('ln -s /home/appuser/venv/lib/python3.9/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
 
-    # Vérifier si le répertoire de destination existe, sinon le créer
-    venv_bin_dir = '/home/appuser/venv/bin/'
-    if not os.path.exists(venv_bin_dir):
-        os.makedirs(venv_bin_dir)
-
-    # Créer le lien symbolique vers GeckoDriver
-    os.system(f'ln -s /path/to/geckodriver {venv_bin_dir}geckodriver')
 _ = installff()
 
 
