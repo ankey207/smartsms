@@ -28,9 +28,11 @@ opts.add_argument("--headless")
 opts.add_argument("--disable-notifications")
 opts.add_argument("--disable-popup-blocking")
 
-@st.cache_resource
-def get_driver():
-    return webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts)
+service = Service(GeckoDriverManager().install())
+
+#@st.cache_resource
+#def get_driver():
+#    return webdriver.Firefox(service=service, options=opts)
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
@@ -155,9 +157,9 @@ if segment=="SmartSMS":
                         messages.append(message)
 
                 #lancement du navigateur
-                driver =get_driver()
+                #driver = get_driver()
                 #driver =uc.Chrome(options=chrome_options)
-                #driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
+                driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/authentication")
 
