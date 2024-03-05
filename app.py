@@ -30,7 +30,7 @@ import os, sys
 #opts.add_argument("--disable-popup-blocking")
 
 def get_driver():
-    return uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    return uc.Chrome(service=Service(ChromeDriverManager(version="114.0.5735.90").install()), options=chrome_options)
 
 
 
