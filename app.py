@@ -8,9 +8,9 @@ from selenium.webdriver.chrome.options import Options
 import streamlit_antd_components as sac
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-#from selenium.webdriver.firefox.service import Service
-#from webdriver_manager.firefox import GeckoDriverManager
+#from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-notifications")
@@ -27,12 +27,11 @@ import function
 #opts.add_argument("--headless")
 #opts.add_argument("--disable-notifications")
 #opts.add_argument("--disable-popup-blocking")
+driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
 
 @st.cache_resource
 def get_driver():
-    return uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-
-
+    return webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=chrome_options)
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
