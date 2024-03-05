@@ -167,6 +167,7 @@ if segment=="SmartSMS":
                 driver =webdriver.Firefox(options=opts)#,service=service
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/authentication")
+                time.sleep(5)
 
                 #attendre que le qrcode soit disponble
                 wait_element = WebDriverWait(driver, 120)
@@ -195,8 +196,6 @@ if segment=="SmartSMS":
 
                         # Attendre 2 secondes avant de mettre à jour le QR code
                         time.sleep(2)
-                        st.image(BytesIO(driver.get_screenshot_as_png()), caption='Capture d\'écran', use_column_width=True)
-
 
                 #une fois le code QR scanné
                 except:
