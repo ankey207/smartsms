@@ -22,16 +22,15 @@ import undetected_chromedriver as uc
 import time
 import function
 
-#from selenium.webdriver import FirefoxOptions
-#opts = FirefoxOptions()
-#opts.add_argument("--headless")
-#opts.add_argument("--disable-notifications")
-#opts.add_argument("--disable-popup-blocking")
-driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
+from selenium.webdriver import FirefoxOptions
+opts = FirefoxOptions()
+opts.add_argument("--headless")
+opts.add_argument("--disable-notifications")
+opts.add_argument("--disable-popup-blocking")
 
 @st.cache_resource
 def get_driver():
-    return webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=chrome_options)
+    return webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=opts)
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
