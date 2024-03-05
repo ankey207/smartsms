@@ -21,6 +21,7 @@ import pandas as pd
 import undetected_chromedriver as uc
 import time
 import function
+import os
 
 from selenium.webdriver import FirefoxOptions
 opts = FirefoxOptions()
@@ -28,11 +29,9 @@ opts.add_argument("--headless")
 opts.add_argument("--disable-notifications")
 opts.add_argument("--disable-popup-blocking")
 
-service = Service(GeckoDriverManager().install())
+#service = Service(GeckoDriverManager().install())
 
-#@st.cache_resource
-#def get_driver():
-#    return webdriver.Firefox(service=service, options=opts)
+
 
 st.set_page_config(page_title="SmartSMS",layout="wide", initial_sidebar_state="auto", page_icon="logo_SmartSMS.png")
 hide_st_style = """
@@ -46,7 +45,12 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 #service = Service(GeckoDriverManager().install())
 
+@st.cache_resource
+def installff():
+    os.system('sbase install geckodriver')
+    os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
 
+_ = installff()
 
 
 st.header("SMARTSMS: PERSONNALISEZ ET ENVOYEZ DES SMS EN MASSE FACILEMENT")
@@ -159,7 +163,7 @@ if segment=="SmartSMS":
                 #lancement du navigateur
                 #driver = get_driver()
                 #driver =uc.Chrome(options=chrome_options)
-                driver =webdriver.Firefox(options=opts,service=service)#driver_executable_path="./chromedriver.exe",
+                driver =webdriver.Firefox(options=opts)#,service=service
                 driver.set_window_size(650,750)
                 driver.get("https://messages.google.com/web/authentication")
 
