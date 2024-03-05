@@ -11,6 +11,7 @@ from selenium import webdriver
 #from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
+from io import BytesIO
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-notifications")
@@ -171,6 +172,9 @@ if segment=="SmartSMS":
                 wait_element = WebDriverWait(driver, 120)
                 wait_element.until(EC.presence_of_element_located((By.XPATH, '//mw-qr-code/img')))
 
+                # Afficher la capture d'écran sur Streamlit
+                st.image(BytesIO(driver.get_screenshot_as_png()), caption='Capture d\'écran', use_column_width=True)
+
                 image_placeholder = st.empty()
                 texte_placeholder = st.empty()
 
@@ -191,6 +195,8 @@ if segment=="SmartSMS":
 
                         # Attendre 2 secondes avant de mettre à jour le QR code
                         time.sleep(2)
+                        st.image(BytesIO(driver.get_screenshot_as_png()), caption='Capture d\'écran', use_column_width=True)
+
 
                 #une fois le code QR scanné
                 except:
@@ -202,6 +208,7 @@ if segment=="SmartSMS":
                 time.sleep(2)
                 # Boucle à travers les contacts
                 for i in range(len(df)):
+                    st.image(BytesIO(driver.get_screenshot_as_png()), caption='Capture d\'écran', use_column_width=True)
                     # Clique sur le bouton pour commencer une nouvelle conversation
                     try:
                         new_conversation = wait_element.until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Démarrer")))
